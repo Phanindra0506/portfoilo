@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Portfolio - Mamidipaka Phanindra</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;}
+  body {
+    margin:0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    background:#0077b6; color:#caf0f8; line-height:1.6; scroll-behavior:smooth;
+  }
+  a {
+    color:#90e0ef; text-decoration:none; transition:color .3s;
+  }
+  a:hover,a:focus {
+    color:#48cae4; outline:none;
+  }
+  nav {
+    position:fixed; top:0; left:0; right:0;
+    background:#023e8acc; height:80px;
+    display:flex; align-items:center; padding:0 25px;
+    box-shadow:0 4px 12px rgba(0,0,0,.3); z-index:1000;
+  }
+  .nav-container {
+    max-width:1050px; margin:0 auto; width:100%;
+    display:flex; align-items:center; justify-content:flex-start; gap:40px;
+  }
+  nav ul {
+    list-style:none; display:flex; gap:3rem; padding:0; margin:0; font-size:1.1rem; font-weight:600;
+    flex-grow:1; justify-content:flex-start;
+  }
+  nav li a {
+    padding:.5rem 1rem; border-radius:8px; font-weight:600;
+  }
+  nav li a.active, nav li a:hover {
+    background:#48cae4; color:#023e8a;
+    box-shadow:0 0 8px #48cae4,0 0 15px #48cae4;
+  }
+  /* Hero with stylized card and blurred background */
+  #hero {
+    min-height: 100vh; padding-top:100px;
+    display: flex; justify-content: center; align-items: center;
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+    position: relative; filter: brightness(.65);
+    text-align: center;
+  }
+  #hero::after {
+    content:""; position:absolute; inset:0;
+    backdrop-filter: blur(6px);
+    background: rgba(0,0,0,0.4);
+    z-index:0;
+  }
+  #hero .card {
+    position: relative; z-index:1; background: rgba(255 255 255 / 0.15);
+    border-radius: 32px; padding: 60px 50px; max-width: 600px; width: 90vw;
+    box-shadow: 0 0 30px 8px rgba(72,202,228,0.7);
+    color: #caf0f8;
+    backdrop-filter: saturate(180%) blur(20px);
+    user-select: none;
+  }
+  #hero .card h1 {
+    font-size: 4rem; margin-bottom: 0.2rem; font-weight: 900;
+    letter-spacing: 4px; text-shadow: 0 0 20px #48cae4;
+  }
+  #hero .card p {
+    font-size: 1.6rem; font-weight: 500; margin-bottom: 2rem;
+    font-style: italic; line-height: 1.4;
+    text-shadow: 0 0 10px #48cae4;
+  }
+  #hero .card button {
+    background: linear-gradient(90deg, #48cae4, #00b4d8);
+    border:none; border-radius: 60px; padding: 1.1rem 3rem;
+    font-size: 1.3rem; font-weight: 700; color:#023e8a; cursor:pointer;
+    box-shadow: 0 6px 25px rgba(72,202,228,0.8);
+    transition: background 0.4s ease, transform 0.3s ease;
+  }
+  #hero .card button:hover, #hero .card button:focus {
+    background: linear-gradient(90deg, #90e0ef, #48cae4);
+    transform: scale(1.1); outline:none;
+  }
+  /* Profile image on the left side */
+  #hero .profile-image {
+    position: absolute;
+    left: 20px; /* Position from the left */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 50%; /* Optional: for circular image */
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+  /* Skills */
+  #skills {
+    max-width: 900px; margin: 80px auto 0 auto; padding: 0 20px;
+  }
+  #skills h2 {
+    font-weight: 700; font-size: 2.8rem; color: #90e0ef; margin-bottom: 2rem;
+    letter-spacing: 5px; user-select:none; text-align: left;
+  }
+  .skills-container {
+    display: flex; flex-wrap: wrap; gap: 24px; justify-content: center;
+  }
+  .skill-card {
+    background: rgba(0, 139, 190, 0.3);
+    border-radius: 16px; box-shadow: 0 0 20px #48cae4aa;
+    width: 140px; height: 140px; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; font-weight: 700;
+    color: #caf0f8; font-size: 1.2rem; user-select:none;
+    transition: transform 0.3s ease;
+  }
+  .skill-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 32px #48cae4ff;
+  }
+  /* Projects */
+  #projects {
+    background-color: #023e8a; border-radius: 20px; margin: 80px auto;
+    max-width: 900px; padding: 40px 30px;
+    box-shadow: 0 8px 30px rgba(72,202,228,0.55);
+    color: #caf0f8;
+    display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;
+  }
+  #projects h2 {
+    width: 100%; font-size: 2.8rem; text-align: center; margin-bottom: 2.2rem;
+    letter-spacing: 3px; user-select: none;
+  }
+  .project-card {
+    background: #0077b6cc; border-radius: 14px; padding: 18px 20px;
+    box-shadow: 0 0 12px rgba(72,202,228,0.5);
+    display: flex; align-items: center; gap: 20px;
+    flex: 1 1 300px; color: #caf0f8; font-weight: 600;
+    cursor: default;
+  }
+  .project-card img {
+    width: 90px; height: 70px; object-fit: cover; border-radius: 12px;
+    box-shadow: 0 0 10px #90e0ef; flex-shrink: 0;
+  }
+  .project-card div {
+    font-size: 1.1rem; user-select:none;
+  }
+  /* Contact */
+  #contact {
+    padding: 60px 20px; max-width: 480px; margin: 0 auto 100px auto;
+    text-align: center; color: #caf0f8;
+  }
+  #contact h2 {
+    font-weight: 700; font-size: 2.8rem; margin-bottom: 2rem;
+    color: #00b4d8; letter-spacing: 4px; user-select: none; text-align:left;
+  }
+  .contact-info {
+    background: #023e8a; border-radius: 16px; padding: 28px 25px;
+    box-shadow: 0 5px 20px rgba(72,202,228,0.4);
+    text-align: left; font-size: 1.1rem; line-height: 1.65;
+    user-select:none;
+  }
+  .contact-info p {
+    margin: 0 0 12px;
+  }
+  .contact-info strong {
+    color: #90e0ef; font-weight: 700;
+  }
+  /* Education section */
+  #education {
+    max-width: 900px; margin: 80px auto; padding: 0 20px;
+  }
+  #education h2 {
+    font-weight: 700; font-size: 2.8rem; color: #90e0ef; margin-bottom: 2rem;
+    letter-spacing: 5px; user-select:none; text-align: left;
+  }
+  table.education-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    box-shadow: 0 0 20px #48cae4aa;
+    background: rgba(255 255 255 / 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: saturate(180%) blur(15px);
+  }
+  thead.education-thead {
+    background: #48cae4cc;
+    color: #023e8a;
+    text-align: left;
+  }
+  thead.education-thead th {
+    padding: 1rem 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  tbody.education-tbody tr:hover {
+    background: #90e0ef44;
+  }
+  tbody.education-tbody td {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid #48cae4aa;
+    color: #caf0f8;
+    font-weight: 600;
+  }
+  footer {
+    padding: 24px 16px; background: #023e8a; color: #90e0ef;
+    text-align: center; font-size: .9rem; letter-spacing: 1px;
+    user-select:none;
+  }
+  @media (max-width: 600px) {
+    #hero .card {
+      padding: 40px 25px; width: 95vw;
+    }
+    #hero .profile-image {
+      width: 150px; /* Adjust size for smaller screens */
+    }
+    #education h2, #skills h2 {
+      font-size: 2.4rem;
+      letter-spacing: 3px;
+    }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-container" role="navigation" aria-label="Main navigation">
+    <ul>
+      <li><a href="#hero" class="active">Home</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+<section id="hero" aria-label="Introduction and welcome message">
+  <img src="blob:https://web.whatsapp.com/29a5b3a8-f48f-4c8d-bdef-f79ee20ddd1e" alt="Profile Picture" class="profile-image"/>
+  <div class="card">
+    <h1>Mamidipaka Phanindra</h1>
+    <p>Passionate developer crafting thoughtful digital experiences.</p>
+    <button id="btnContact" aria-label="Scroll to contact section">Get In Touch</button>
+  </div>
+</section>
+<section id="skills" aria-label="Skills">
+  <h2>Skills</h2>
+  <div class="skills-container">
+    <div class="skill-card" tabindex="0">HTML</div>
+    <div class="skill-card" tabindex="0">CSS</div>
+    <div class="skill-card" tabindex="0">JavaScript</div>
+    <div class="skill-card" tabindex="0">C</div>
+    <div class="skill-card" tabindex="0">Python</div>
+    <div class="skill-card" tabindex="0">Java</div>
+  </div>
+</section>
+
+<section id="education" aria-label="Education profile">
+  <h2>Education</h2>
+  <table class="education-table" role="table" aria-describedby="education-desc">
+    <caption id="education-desc" style="text-align:left; padding:0 0 8px 8px; font-style: italic; color:#90e0ef;">
+      Academic qualifications with institutions and percentage marks.
+    </caption>
+    <thead class="education-thead">
+      <tr>
+        <th scope="col">Qualification</th>
+        <th scope="col">Institution</th>
+        <th scope="col">Percentage</th>
+      </tr>
+    </thead>
+    <tbody class="education-tbody">
+      <tr>
+        <td>10th Class</td>
+        <td>Z.P. High School</td>
+        <td>83%</td>
+      </tr>
+      <tr>
+        <td>Intermediate</td>
+        <td>Narayana Junior College</td>
+        <td>85%</td>
+      </tr>
+      <tr>
+        <td>B.Tech</td>
+        <td>Vignan's Institute of Information Technology</td>
+        <td>80%</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="projects" aria-label="Projects">
+  <h2>Projects</h2>
+  <div class="project-card" tabindex="0" aria-label="Easy Money project">
+    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=120&q=80" alt="Easy Money project image"/>
+    <div>Easy Money – Student event platform connecting students with part-time jobs.</div>
+  </div>
+  <div class="project-card" tabindex="0" aria-label="Weather App project">
+    <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?auto=format&fit=crop&w=120&q=80" alt="Weather App screenshot"/>
+    <div>Weather App – Real-time forecast built with JS & OpenWeather API.</div>
+  </div>
+  <div class="project-card" tabindex="0" aria-label="Task Manager project">
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=120&q=80" alt="Task Manager screenshot"/>
+    <div>Task Manager – Simple to-do app with local storage persistence.</div>
+  </div>
+</section>
+<section id="contact" aria-label="Contact details">
+  <h2>Contact Me</h2>
+  <div class="contact-info" role="contentinfo">
+    <p><strong>Name:</strong> Mamidipaka Phanindra</p>
+    <p><strong>Email:</strong> <a href="mailto:phanindra0506@gmail.com" style="color:#90e0ef;">phanindra0506@gmail.com</a></p>
+    <p><strong>Phone:</strong> <a href="tel:+917893938431" style="color:#90e0ef;">7893938431</a></p>
+  </div>
+</section>
+<footer>&copy; 2024 Mamidipaka Phanindra. Crafted with ♥ and code.</footer>
+<script>
+  const navLinks=document.querySelectorAll('nav ul li a');
+  const sections=document.querySelectorAll('section');
+  window.addEventListener('scroll',()=> {
+    const scrollPos=window.scrollY+80; let current=0;
+    sections.forEach((sec,i)=>{if(scrollPos>=sec.offsetTop)current=i;});
+    navLinks.forEach(l=>l.classList.remove('active'));
+    if(navLinks[current]) navLinks[current].classList.add('active');
+  });
+  document.getElementById('btnContact').addEventListener('click',()=> {
+    document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+  });
+</script>
+</body>
+</html>
+
